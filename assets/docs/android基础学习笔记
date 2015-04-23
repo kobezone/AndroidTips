@@ -1,0 +1,489 @@
+android学习笔记
+	第一天
+  1.环境的构建 
+  		1.android官网下载继承好的开发环境 adt bunder eclipse
+  		2.自己eclipse的构建
+  			1.安装ADT android Devlelop Tools
+  			2.安装android的SDK 各个android的版本 
+  			3. AVD android 虚拟设备
+  			4.配置SDK_HOME 和path 将 tools 和platform-tools添加到path中
+  			5.开启虚拟设备 cmd运行 adb shell (ls)测试是否配置成功
+  			AVD(android virtual devices)  ADB(android debug bridge)
+
+   2.android中的目录结构和含义 
+	   	src 源代码 
+	   	gen 自动生成的java file 有R类 对资源进行统一集中管理
+	   	bin 可执行的二进制代码
+	   	libs 库文件
+	   	res android中各个资源文件
+		AndroidManifest.xml android 核心配置文件
+
+   	3.开始android helloworld
+	   	 1.新建android application 一直下一步 默认配置即可
+	   	 2.在layout中 手动添加一个按钮 button 配置 android:onclick:"test"
+	   	   将test 方法写在MainActivity即 主界面视图中即可
+	   	   public void test(View view){
+	   	   	//使用toast弹出窗口进行提示
+	   	   	Toast.MakeText(MainActivity.this,"hello ",Toast.LENGTH_SHORT);
+	   	   }
+	   	 3.使用findViewById(R.id.XXX);
+
+
+   	4.android 的国际化 
+	   	 在res资源文件夹中添加中文支持 
+	   	 新建values-zh_rCN文件夹 结构如:values-zh_rcn/strings.xml  
+	   	 复制strings.xml到其中 保持string的key 即属性name的值不变 value相对应的进行国际化即可
+
+   	5.理解android程序的运行 
+	   	  Androidmanifest.xml  负责总体的配置 相当于web中的web.xml
+	   	  Activity 界面交互处理 相当于 javascript 负责layout中的组件的交互
+	   	  layout  android中的布局文件 相当于 html 负责页面和组件的呈现 样式等 
+	   	  R类 android中的资源管理类 自动生成的  管理android project中的各种资源的 
+	   	     相当于文件系统一样  可以管理如图片 string 视频 等等资源  Activity和layout中的交流中
+	   	      提供各种资源的接口的类.
+
+	android 学习第二天 笔记 
+	    1.android开发中DDMS界面的熟悉和使用 特别是logcat filter 设备等使用
+	    2.android的打包和反编译 采用dex2jar反编译为jar 通过jd-gui反编译为java文件 
+	    3.android中的事件监听 
+	      1.动态设置  在activity中采用 xx.setOnXXXListener(new XXXListener(){ @override method(){}});
+	      2.onclick事件可以采用配置的方式 在 android布局文件对应的组件中配置 android:onClick="xxxx",在activity中书写这个方法即可 
+	      3.layout 布局文件中 RelativeLayout是个组件容器相当于div  view相当于input button等组件
+	      4.android中的事件类型  onClickListener onLongClickListener onKeyListener onTouchListener   等事件类型 均是来自原事件 (action_down action_move action_up)的组合
+	      5.viewTYpe 是个组件的容器如layout  盛放view 
+	      6.@string/xxxx values中strings.xml配置的key  通过R类管理  android:id="@+id/textview1" @+id表示新建一个id
+
+ android学习笔记 
+    注意几个类  Toast.makeText();  弹出提示的窗口
+    R 资源管理类
+    Log 日志记录类 Log.i();log.d();等日志方法
+    ddms Dalivim Debug Monitor Sevices 
+    adb   Android Debug Bridge
+    熟悉常用的adb命令 
+    adb kill-server
+    adb start-server
+    adb shell 得到shell  shell有很多常用的linux命令的权限
+    adb device
+
+    android的 打包   
+    bin目录下有debug的apk文件
+    使用android tools 打包 签名 填写相关信息 生成唯一的id 防止覆盖
+
+    android的反编译 
+    解压 
+    classes.dex文件 通过dex2jar 反编译为jar  
+    再通过jd——gui 反编译为熟悉java文件
+     理解jvm和android的虚拟机的不同 
+     jvm   .java->.class->.jar 运行
+     Dalivim vm  .java->.class->.dex 运行  将所有的.class文件合并为一个文件 便于移动设备上的执行和 减轻内存的消耗
+
+    android中主线程UI线程阻塞的问题和解决方案 
+    1.采用创建新的线程 new Thread(new Runable({
+        override run 
+        写和主线程UI设置无关的方法 
+        通过post来解决  核心采用生产者和消费者的模型来解决的 
+        view.post(new Runable({
+          处理主线程的设置
+          UI组件的设置 样式 布局等
+        }))
+
+    })).start();
+
+    2.android 动画  Animation
+      AlphaAnimation  渐变动画 
+      ScaleAnimation   渐变尺寸缩放
+      RotateAnimation   画面旋转
+      TranslateAnimation 位置移动
+      AnimationSet  动画集
+
+    3.android sms 消息发送 
+        setContentView(R.layout.activity_main);
+        EditText phoneString = (EditText) findViewById(R.id.editText1);
+        EditText msgContentStr = (EditText) findViewById(R.id.editText2);
+        String phone = phoneString.getText().toString();
+        String msgContent = msgContentStr.getText().toString();
+        if(TextUtils.isEmpty(phone) || phone.matches("^\\d{5,11}$")){
+          Toast.makeText(this, "请输入正确的电话号码", Toast.LENGTH_LONG).show();
+        }else if(TextUtils.isEmpty(msgContent)){
+          Toast.makeText(this, "请输入要发送的消息", Toast.LENGTH_LONG).show();
+        }else{
+          //发送消息
+          //得到默认的消息管理的manager
+          SmsManager manager = SmsManager.getDefault();
+          //短信的长度有限制 所以才需要使用分割 divideMessage能按照消息的最大长度分割短信 并返回arrayList
+          ArrayList msgList = manager.divideMessage(msgContent);
+          //调用系统api对消息进行发送
+          for(String msg:msgList){
+            manager.sendTextMessage(phone, null, msg, null,null);
+          }
+          
+        }
+
+
+      4.ctrl+F11 切换横竖屏幕
+
+      5. 当EditText是多行文本时， 光标如何设置在从左上角
+        将andtoid:gravity="center"修改为
+        android:gravity="top"
+
+      6.android 布局
+      相对布局 线性布局 绝对布局 表格布局 
+       android:orientation="vertical" 对其的方向 
+       android:orientation 布局方向。
+       horizontal是让所有的子元素按水平方向从左到右排列， vertical是让所有的子元素按竖直方向从上到下排列。
+
+       android:gravity="center" 内部排列对其的方向 gravity是对控件自身来说的，控件在它本身中的位置的对其方式
+      android:layout_gravity是指定本元素相对它的父元素的对齐方式。
+
+      7.android 的测试
+      8.拨打电话 加入权限 call
+
+
+
+android  第三天学习笔记 
+
+1.下拉列表组件的使用  
+Spinner 标签
+String[] strs={"CEO","PM","PL"};
+        //创建一个数组适配器
+        ArrayAdapter aa=new ArrayAdapter(this,android.R.layout.simple_spinner_item,strs);
+        //设置下拉列表的适配器
+        position.setAdapter(aa);
+2.评价组件的使用
+RatingBar 标签组件 android平台五星评价的组件
+  android:numStars="5"
+  android:rating="3"
+
+
+3.android的文件操作
+不涉及android权限的问题 可以使用java.io来操作文件 
+设计到android文件的权限问题 需要使用android activity的api来对文件进行操作
+使用 openFileInput() openFileOutput来对文件进行读写操作
+-文件 d 标识目录
+r 可读 w可写 
+context 提供 openFileOutput(path,Mode)
+
+可以通过linux下的命令行来改变一个文件的读写执行的权限
+
+chmod xxx /data/data/xxx
+文件权限：chmod (change Mode)    sudo chmod -R 666 
+          sudo chmod 664 file 
+(7     4+2+1   rwx) 
+(6     4+2+0   rw_) 
+(5     4+0+1   r_x) 
+(4     4+0+0   r__) 
+(3     0+2+1   _wx) 
+(2     0+2+0   _w_) 
+(1     0+0+1   __r) 
+(0     0+0+0   ___) 
+//显示详情
+ls -l
+
+
+4.写入sd卡的权限和操作 
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+File sdcard = Environment.getExternalStorageDirectory().getAbsoluteFile();
+Environment 得到一些android中常用的目录 比如sf卡的状态 DCIM 目录 root文件夹 sf卡的入口等
+写入手机内部存储的操作
+Environment.getDataDirectory(); 可以写到data/data/包名/files目录下
+<uses-permission android:name="android.permission.READ_OWNER_DATA" />
+<uses-permission android:name="android.permission.WRITE_OWNER_DATA" />
+这个目前知道好像只能写到自己所在的包下面，也就是只能在自己的包下面来创建文件，但是可以去改写已经存在的文件
+没什么变态的需求的话可以放到这个路径或者创建一个其子目录下面
+/data/data/<pkg name>/files 
+
+5.计算sd卡 rom上的空间的使用情况 
+
+StatFs stat = new StatFs(path.getPath());
+采用 StatFs(Path) 来初始化一个文件空间统计对象 
+采用 statFs.getBlockSize 得到格式化盘的块大小
+采用 getTotleBlockCount 得到总得块的数目
+采用 getAvailableBlocks 得到可利用的块的数目
+采用 Formatter.formatFileSize(Context,Long)来格式化显示磁盘的大小
+
+
+
+5.android 学习笔记 第四天
+android中的数据保存 
+1.文件的形式 采用java.io 或context.openFileInput  或采用SharedPreferences(使用context得到SharedPreferences)
+本质是采用序列化xml的形式
+/data/data/<package Name>/shared_prefs
+2.使用sqlite 内嵌入的数据库 进行文件的读写操作
+3.通过网络得到相应的资源
+4.本地资源 可以采用R类来管理 也可以使用 getClass().getClassLoader().getResourceAsStream("filename");
+
+6.sqlite嵌入式数据库
+1.SQLiteOpenHelper  sqlite数据库的开启新建的类
+SQLiteOpenHelper中常用的方法 
+//    db.beginTransaction(); db.endTransaction() 事物
+//    db.close();//关闭连接 
+//    db.insert(table, nullColumnHack, values) 执行添加
+//    db.delete(table, whereClause, whereArgs) //执行删除
+//    db.update(table, values, whereClause, whereArgs)
+table 表名
+values 一般传入 contentValues 只能存放基本数据类型
+ // 注意:ContentValues以键值对的形式存放数据 类似如hashMap的东东  
+ whereClause where 后面的条件子句 eg :name=? and age<?
+ whereArgs  where子句中的? 的赋值数组
+
+以上三个方法的第一个参数都是表示要操作的表名；insert中的第二个参数表示如果插入的数据每一列都为空的话，需要指定此行中某一列的名称，系统将此列设置为NULL，不至于出现错误；insert中的第三个参数是ContentValues类型的变量，是键值对组成的Map，key代表列名，value代表该列要插入的值；update的第二个参数也很类似，只不过它是更新该字段key为最新的value值，第三个参数whereClause表示WHERE表达式，比如age > ? and age<? 等，最后的whereArgs参数是占位符的实际参数值；delete方法的参数也是一样。
+
+//    db.isOpen(); db.openOrCreateDatabase(file, factory)
+//    db.query(sql) db.rowQuery() 查询 
+//    db.create(factory) 
+//    db.execSQL(sql) db.execSQL(sql, bindArgs) 执行sql语句
+
+sqlite的查询 
+db.rowQuery()
+db.rawQuery(sql, selectionArgs); 
+
+android sqlite的查询 详见:
+http://www.cnblogs.com/Excellent/archive/2011/11/19/2254888.html
+
+android sqlite 数据库开启事物 
+eg:  
+//得到操作数据库对象的sqlite openHelper
+ PersonDBOpenHelper helper = new PersonDBOpenHelper(getContext());
+    SQLiteDatabase db = helper.getWritableDatabase();
+    db.beginTransaction();// 开始数据库的事务
+    try {
+      db.execSQL("update person set account = account-100 where name='zhangsan'");
+      // s.equals("haha");
+      db.execSQL("update person set account = account+100 where name='zhangsan0'");
+      db.setTransactionSuccessful(); // 如果没有标记数据库事务成功 //数据会回滚
+    } finally {
+      db.endTransaction(); // 检查是否设置了事务成功的flag
+    }
+    db.close();
+  }
+
+  android中的事务
+  android中由于有各种情况 线程被中断 电池耗尽等 所以操作是需要注意事务的处理 
+  防止数据不统一
+
+
+
+7.android的测试和debug调试 
+android project的测试 可以使用android junit测试框架来测试 
+对已经存在的项目 新建一个 Android Test Project 即可 
+ 也可以手动的添加 在 <uses-sdk> 和<application>
+eg:
+ <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="18" /> 
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:targetPackage="com.learn.dbteset" />
+        //注意测试的包名的书写 
+在<application>中添加<uses-library android:name="android.test.runner" />
+即可
+测试类需要extends android.test.AndroidTestCase 并重写 setUp()和tearDown
+setUp一般用来初始化对象 
+tearDown 一般用来释放资源 将初始化的对象设置为空 以便于android GC回收
+
+android junit test 
+
+android的debug和java javaweb中的debug一样 
+注意android的运行环境为真实的设备 或avd中 
+在logcat才能查看System.out.println()的结果 使用Log来方便快捷的记录日志
+
+8.android滑动 分为左右滑动和上下滑动
+上下滑动 :
+<ScrollView> 使用scrollView标记来包裹即可
+<HorizontalScrollView> 水平滑动
+
+9.ListView
+listView 视图
+可以直接继承ListActivity的 同时需要继承adapter的实现
+Adapter是用来帮助填充数据的中间桥梁，比如通过它将数据填充到ListView, GridView, Gallery.而android 提供了几种Adapter:ArrayAdapter, BaseAdapter, CursorAdapter, HeaderViewListAdapter, ListAdapter, ResourceCursorAdapter, SimpleAdapter, SimpleCursorAdapter, SpinnerAdapter, WrapperListAdapter.
+根据数据来源形式的不同可以选择不同的Adapter,比如数据来源于一个Arraylist 就使用BaseAdapter,SimpleAdapter,而数据来源于通过查询数据库获得Cursor那就使用
+ListView 的设计 需要2个布局文件夹  和对应的处理器
+1.有ListView的标记的layout 需要有id
+2.ListView中每一项其实都是一条记录 这条记录的展现需要一个布局文件来定义 可以使用任意布局来展现每一条记录。
+3.操作 Activity中需要拿到ListVeiw 并设置其数据适配器（adapter） 可以继承BaseAdapter或子类（ArrayAdapter ListAdapter）
+重写2个方法 
+  public int getCount()； //list中显示记录的数目
+  public View getView(int position, View convertView, ViewGroup parent)//位置 内容实体
+  内容视图可以直接用程序new eg TextView tv = new TextView（MainActivity.this）;
+  也可以使用getLayoutInflater 得到布局的打气筒 
+  diaoyonginflater.infate(inw resource, ViewGroup root)  将布局文件实例化成view对象即可
+
+  eg：
+  LayoutInflater layoutInflater =
+                    (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+      View view = layoutInflater.inflate(R.layout.list_item, null);
+
+
+
+
+
+10.setContentView(View view)和infalte()
+
+inflate这个方法总共有四种形式（见下面），目的都是把xml表述的layout转化为View对象。
+
+其中有一个比较常用，View inflate(int resource, ViewGroup root)。
+
+int resource，也就是resource/layout文件在R文件中对应的ID，这个必须指定。
+而ViewGroup root则可以是null，null时就只创建一个resource对应的View，不是null时，会将创建的view自动加为root的child。
+setContentView()一旦调用, layout就会立刻显示UI；而inflate只会把Layout形成一个以view类实现成的对象，有需要时再用setContentView(view)显示出来
+一般在activity中通过setContentView()将界面显示出来，但是如果在非activity中如何对控件布局设置操作了，这需LayoutInflater动态加载
+可以通过以下三种方式得到LayoutInflate对象 
+LayoutInflater inflater = getLayoutInflater();
+LayoutInflater inflater1 = LayoutInflater.from(this);
+LayoutInfalter inflater2 =   (LayoutInfalte)this.getSystemService(LAYOUT_INFLATER_SERVICE);  //本质是一样的 都是调用这个方法
+inflater.inflate(int resource,ViewGroup root);//来实例化对象
+
+
+
+
+11.Android中的弹出对话框
+
+询问对话框
+new　AlertDialog.Builder(MainActivity.this).setTitle(String title).setMessage(String message).setPositiveButton(String text,onClickListener)
+...
+.show() 显示出来
+
+输入对话框
+new AlertDialog.Builder(this).setTitle("请输入").setView(new EditText(this)).setPositiveButton("提交", null).setNegativeButton("取消", null).show();
+单选
+  new AlertDialog.Builder(this).setTitle("请选择性别").setSingleChoiceItems(new String[]{"男","女","未知"},1, null).show();
+列表
+setItems（）
+
+能设置标题 （title） 内容（Message），列表（item）,图标（icon），单选（SingChoiceItems）, 多选(MultiChoiceItems)，按钮  视图(view 可以存放图片等)等
+
+
+12.android contentProvider 内容提供者 
+android中通过 contentProvider 对外暴露对数据库（一般为私有的外部应用程序无法访问的db）主动暴露接口
+对私有数据库的crud  匹配uri 实现crud的方法
+通过唯一的uri来实现的 
+注意provider需要在AndroidManifest.xml文件中注册 
+如：  <provider android:name="MyProvider" android:authorities="com.ruixin.login" /> 
+
+暴露接口需要继承ContentProvider tigong访问的uri
+外部在取数据的时候 通过context 得到对应的ContentResolver
+ContentResolver：当外部应用需要对ContentProvider中的数据进行添加、删除、修改和查询操作时，可以使用ContentResolver 类来完成，要获取ContentResolver 对象，可以使用Activity提供的getContentResolver()方法。 ContentResolver使用insert、delete、update、query方法，来操作数据。
+
+eg:生成一条系统短信 
+ContentResolver resolver = getContentResolver();
+Uri uri = Uri.parse("content://sms/");
+ContentValues values = new ContentValues();
+values.put("address", "95533");
+values.put("date", System.currentTimeMillis());
+values.put("type", 1);
+values.put("body", "尊敬的用户,你的尾号为558的建行卡,收到汇款人民币888888元,活期余额人民币99999999.52元");
+resolver.insert(uri, values);
+
+/**
+ * 所有的短信
+ */
+public static final String SMS_URI_ALL = "content://sms/";
+/**
+ * 收件箱短信
+ */
+public static final String SMS_URI_INBOX = "content://sms/inbox";
+/**
+ * 发件箱短信
+ */
+public static final String SMS_URI_SEND = "content://sms/sent";
+/**
+ * 草稿箱短信
+ */
+public static final String SMS_URI_DRAFT = "content://sms/draft";
+
+
+
+Activity（活动）的设置
+Activity全屏设置
+方式1：AndroidManifest.xml
+<activity android:name="myAcitivty"  android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+方式2：代码实现
+requestWindowFeature(Window.FEATURE_NO_TITLE);    // 隐藏标题栏
+getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);  // 隐藏状态栏
+注意：设置全屏的俩段代码必须在setContentView(R.layout.main) 之前，不然会报错。
+
+Activity横竖屏设置
+方式1：AndroidManifest.xml
+<activity android:name="myAcitivty"  android:screenOrientation="landscape" />   // 或者 “portrait”
+方式2：代码实现
+setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+获取横屏方向
+int orientation = this.getResources().getConfiguration().orientation;
+orientation 的常用取值可以为 ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE（横屏） 或 ActivityInfo.SCREEN_ORIENTATION_PORTRAIT（竖屏）
+
+Activity屏幕一直显示
+1：AndroidManifest.xml添加权限
+<uses-permission android:name="android.permission.WAKE_LOCK" />
+2：代码实现
+getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+
+Android handler和message的消息传递机制  UI线程阻塞
+
+android中运行一个app 就是一个进程 android 支持多线程  
+android 中 主线程 UI线程负责界面的显示和更新
+耗时操作可以放在其他的线程中 当涉及到UI的更新时通过handler 和message来通知主线程更新UI 
+
+ Handler主要接收子线程发送的数据, 并用此数据配合主线程更新UI，用来跟UI主线程交互用。比如可以用handler发送一个message，然后在handler的线程中来接收、处理该消息，以避免直接在UI主线程中处理事务导致影响UI主线程的其他处理工作，Android提供了Handler作为主线程和子线程的纽带；也可以将handler对象传给其他进程，以便在其他进程中通过handler给你发送事件；还可以通过handler的延时发送message，可以延时处理一些事务的处理。
+
+通常情况下，当应用程序启动时，Android首先会开启一个主线程 (也就是UI线程) , 主线程为管理界面中的UI控件，进行事件分发。如果此时需要一个耗时的操作，例如:联网读取数据，或者读取本地较大的一个文件的时候，你不能把这些操作放在主线程中，如果你放在主线程中的话，界面会出现假死现象,如果5秒钟还没有完成的话，会收到Android系统的一个错误提示"强制关闭" 即ANR（application not response）. 
+
+这个时候我们需要把这些耗时的操作，放在一个子线程中,因为子线程涉及到UI更新，但是当子线程中有涉及到操作UI的操作时，就会对主线程产生危险，也就是说，更新UI只能在主线程中更新，在子线程中操作是危险的. 这个时候，Handler就出现了来解决这个复杂的问题，由于Handler运行在主线程中(UI线程中)，它与子线程可以通过Message对象来传递数据，这个时候，Handler就承担着接受子线程传过来的(子线程用sedMessage()方法传递)Message对象，(里面包含数据), 把这些消息放入主线程队列中，配合主线程进行更新UI。
+
+Handler一些特点:
+
+     handler可以分发Message对象和Runnable对象到主线程中, 每个Handler实例,都会绑定到创建他的线程中(一般是位于主线程), 也就是说Handler对象初始化后，就默认与对它初始化的进程的消息队列绑定，因此可以利用Handler所包含的消息队列，制定一些操作的顺序。
+
+ 
+
+三、Handler中分发消息的一些方法
+
+        post(Runnable)
+
+        postAtTime(Runnable,long)
+
+        postDelayed(Runnable long)
+
+            post类方法允许你排列一个Runnable对象到主线程队列中
+
+        sendEmptyMessage(int)
+
+        sendMessage(Message)
+
+        sendMessageAtTime(Message,long)
+
+        sendMessageDelayed(Message,long)
+
+           sendMessage类方法, 允许你安排一个带数据的Message对象到队列中，等待更新.
+
+ 
+
+四、应用实例：
+
+   1，传递Message。用于接受子线程发送的数据, 并用此数据配合主线程更新UI。
+
+          在Android中，对于UI的操作通常需要放在主线程中进行操作。如果在子线程中有关于UI的操作，那么就需要把数据消息作为一个Message对象发送到消息队列中，然后，用Handler中的handlerMessge方法处理传过来的数据信息，并操作UI。类sendMessage(Message msg)方法实现发送消息的操作。 在初始化Handler对象时重写的handleMessage方法来接收Messgae并进行相关操作。
+
+  2，传递Runnable对象。用于通过Handler绑定的消息队列，安排不同操作的执行顺序。
+
+Handler对象在进行初始化的时候，会默认的自动绑定消息队列。利用类post方法，可以将Runnable对象发送到消息队列中，按照队列的机制按顺序执行不同的Runnable对象中的run方法。
+
+另外，Android的CPU分配的最小单元是线程，Handler一般是在某个线程里创建的，因而Handler和Thread就是相互绑定的，一一对应。而Runnable是一个接口，Thread是Runnable的子类。所以说，他俩都算一个进程。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   	  
+
+
+
