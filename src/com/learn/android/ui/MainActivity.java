@@ -1,7 +1,13 @@
-package com.learn.android;
+package com.learn.android.ui;
+
+import com.learn.android.R;
+import com.learn.android.R.layout;
+import com.learn.android.base.BaseActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 /**
  * <pre>
@@ -12,10 +18,26 @@ import android.os.Bundle;
  * QQ群 313683173
  * 
  */
-public class MainActivity extends Activity {
+public class MainActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+	}
+
+	@Override
+	protected void initView() {
+		
+		
+	}
+
+	@Override
+	protected void initData() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void toastTest(View v){
+		openActivity(ToastActivity.class);
 	}
 }

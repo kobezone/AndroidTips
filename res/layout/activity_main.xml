@@ -6,13 +6,9 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.learn.android.MainActivity" >
+    tools:context="com.learn.android.ui.MainActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-
+   
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,9 +16,18 @@
         android:text="@string/project_tips" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="@string/author_tips" />
+    
+    <Button
+        android:onClick="toastTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="toastTest"
+        />
+    
 
 </RelativeLayout>
