@@ -23,10 +23,20 @@
         android:text="@string/author_tips" />
     
     <Button
+        android:id="@+id/toast_btn"
         android:onClick="toastTest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="toastTest"
+        android:text="toast提示框"
+        />
+       
+    <Button
+        android:id="@+id/guide_btn"
+        android:layout_below="@id/toast_btn"
+        android:onClick="guideTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="引导界面"
         />
     
 

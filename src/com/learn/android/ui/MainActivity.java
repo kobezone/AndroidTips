@@ -40,4 +40,9 @@ public class MainActivity extends BaseActivity {
 	public void toastTest(View v){
 		openActivity(ToastActivity.class);
 	}
+	
+	public void guideTest(View v){
+		openActivity(GuideActivity.class);
+	}
+	
 }
