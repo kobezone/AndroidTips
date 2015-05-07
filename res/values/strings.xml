@@ -5,6 +5,13 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="project_tips">这是一个学习和交流的项目,记录个人在android项目开发中的所学习和掌握的技术点,心得等,希望和大家一起交流学习.</string>
-    <string name="author_tips">欢迎交流和学习  个人联系方式:\n email:jun_dev@qq.com\n QQ:1991424305 \n群号: 313683173</string>
+    <string name="author_tips">欢迎交流和学习  个人联系方式:\n email:jun_dev@qq.com\n QQ:1991424305 \n群号: 133577639</string>
+
+    <!-- Game2048 -->
+
+    <string name="score">分数：</string>
+    <string name="bestscore">最高分：</string>
+    <string name="newgame">重新开始</string>
+    <string name="appinfo">极客学院2048，作者：ime</string>
 
 </resources>

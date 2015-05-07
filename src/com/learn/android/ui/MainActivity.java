@@ -1,13 +1,11 @@
 package com.learn.android.ui;
 
-import com.learn.android.R;
-import com.learn.android.R.layout;
-import com.learn.android.base.BaseActivity;
-
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.learn.android.R;
+import com.learn.android.base.BaseActivity;
+import com.learn.android.demos.game2048.Game2048Activity;
 
 /**
  * <pre>
@@ -44,5 +42,7 @@ public class MainActivity extends BaseActivity {
 	public void guideTest(View v){
 		openActivity(GuideActivity.class);
 	}
-	
+	public void game2048Test(View v){
+		openActivity(Game2048Activity.class);
+	}
 }

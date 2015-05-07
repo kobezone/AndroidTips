@@ -29,15 +29,24 @@
         android:layout_height="wrap_content"
         android:text="toast提示框"
         />
-       
+
     <Button
         android:id="@+id/guide_btn"
-        android:layout_below="@id/toast_btn"
-        android:onClick="guideTest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="引导界面"
-        />
+        android:layout_alignLeft="@+id/toast_btn"
+        android:layout_below="@+id/toast_btn"
+        android:onClick="guideTest"
+        android:text="引导界面" />
+    
+      <Button
+        android:id="@+id/game2048_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/toast_btn"
+        android:layout_below="@+id/guide_btn"
+        android:onClick="game2048Test"
+        android:text="游戏2048" />
     
 
 </RelativeLayout>

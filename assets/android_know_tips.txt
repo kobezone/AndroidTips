@@ -3,4 +3,7 @@ android开源,知识很多,大家都可以网上搜索和获取.
 
 android  有很多很好的框架 大家可以使用
 1.常用的框架 Volley ImageLoader xUtils 等
- 
+2.会依次集成一些demo 和各方的sdk
+如 百度sdk shareSDK 微信sdk jpushsdk  聚合sdk 等等
+
+下一步的计划 集成2048游戏
