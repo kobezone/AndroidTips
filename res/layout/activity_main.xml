@@ -1,52 +1,51 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.learn.android.ui.MainActivity" >
+    android:orientation="vertical" >
 
-   
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/project_tips" />
-
-    <TextView
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="@string/author_tips" />
-    
     <Button
         android:id="@+id/toast_btn"
-        android:onClick="toastTest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="toast提示框"
-        />
+        android:text="toast提示框" />
 
     <Button
         android:id="@+id/guide_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/toast_btn"
-        android:layout_below="@+id/toast_btn"
-        android:onClick="guideTest"
         android:text="引导界面" />
-    
-      <Button
+
+    <Button
         android:id="@+id/game2048_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/toast_btn"
-        android:layout_below="@+id/guide_btn"
-        android:onClick="game2048Test"
         android:text="游戏2048" />
-    
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/juhe_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="聚合api测试" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/project_tips" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:text="@string/author_tips" />
+    </RelativeLayout>
+
+</LinearLayout>

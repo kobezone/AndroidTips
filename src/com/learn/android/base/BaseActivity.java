@@ -60,8 +60,8 @@ public abstract class BaseActivity extends Activity {
 //		if (!ImageLoader.getInstance().isInited()) {
 //			ImageLoaderConfig.initImageLoader(this, Constants.BASE_IMAGE_CACHE);
 //		}
-		initView();
-		initData();
+//		initView();
+//		initData();
 	}
 
 	@Override
