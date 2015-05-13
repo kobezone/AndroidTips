@@ -1,5 +1,6 @@
 package com.learn.android.ui;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,6 +12,7 @@ import com.learn.android.demos.clock.ClockMainActivity;
 import com.learn.android.demos.game2048.Game2048Activity;
 import com.learn.android.demos.gamecatchcrazycat.CatchCrazyCatMainActivity;
 import com.learn.android.demos.juhe.JuHeApiMainActivity;
+import com.learn.android.demos.tuling.TulingMainActivity;
 
 /**
  * <pre>
@@ -27,11 +29,20 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	private Button juhe_btn;
 	private Button clock_btn;
 	private Button gamecatchcrazycat_btn;
+	private Button tuling_btn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+//		todo
+		Uri uridata = this.getIntent().getData();
+		if(uridata!=null){
+			String data = uridata.getQueryParameter("data");
+			System.out.println("数据:data"+data);
+		}
+		
 		initView();
 		initData();
 	}
@@ -44,6 +55,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		juhe_btn = (Button) findViewById(R.id.juhe_btn);
 		clock_btn =  (Button) findViewById(R.id.clock_btn);
 		gamecatchcrazycat_btn =  (Button) findViewById(R.id.gamecatchcrazycat_btn);
+		tuling_btn =  (Button) findViewById(R.id.tuling_btn);
+		
 		
 	}
 
@@ -55,6 +68,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		juhe_btn.setOnClickListener(this);
 		clock_btn.setOnClickListener(this);
 		gamecatchcrazycat_btn.setOnClickListener(this);
+		tuling_btn.setOnClickListener(this);
 	}
 
 
@@ -84,6 +98,10 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			break;
 		case R.id.gamecatchcrazycat_btn:
 			openActivity(CatchCrazyCatMainActivity.class);
+			break;
+			
+		case R.id.tuling_btn:
+			openActivity(TulingMainActivity.class);
 			break;
 		default:
 			break;

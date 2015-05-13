@@ -39,6 +39,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="抓住神经猫" />
+    
+       <Button
+        android:id="@+id/tuling_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="快乐聊天" />
 
     <RelativeLayout
         android:layout_width="match_parent"
