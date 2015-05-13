@@ -54,9 +54,16 @@
           <activity
             android:name=".demos.juhe.WeatherActivity">
         </activity>
+       
          <activity
             android:name=".demos.juhe.PregActivity">
         </activity>
+         <!--闹钟模块的Activity  -->
+         <activity android:name=".demos.clock.ClockMainActivity"></activity>
+         <activity android:name=".demos.clock.PlayAlarmAty"></activity>
+         <receiver android:name=".demos.clock.AlarmReceiver"></receiver>
+         <!--抓住神经猫  -->
+          <activity android:name=".demos.gamecatchcrazycat.CatchCrazyCatMainActivity"></activity>
     </application>
 
 </manifest>

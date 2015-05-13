@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" additionalparam=" -charset utf-8 -encoding utf-8 " author="true" classpath="libs/juhe_sdk_v_2_6.jar;libs/android-support-v4.jar;libs/javabase64-1.3.1.jar" destdir="doc" doctitle="AndroidTipAPI" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="com.learn.android.demos.game2048,com.learn.android.adapter,com.learn.android.demos.clock,com.learn.android.ui,com.learn.android.base,com.learn.android.utils.tools,com.learn.android,com.learn.android.utils,com.learn.android.crash,com.learn.android.demos.gamecatchcrazycat,com.learn.android.demos.toast,com.learn.android.data,com.learn.android.demos.juhe" source="1.7" sourcepath="src;gen" splitindex="true" use="true" version="true"/>
+    </target>
+</project>

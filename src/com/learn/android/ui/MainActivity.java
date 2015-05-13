@@ -7,7 +7,9 @@ import android.widget.Button;
 
 import com.learn.android.R;
 import com.learn.android.base.BaseActivity;
+import com.learn.android.demos.clock.ClockMainActivity;
 import com.learn.android.demos.game2048.Game2048Activity;
+import com.learn.android.demos.gamecatchcrazycat.CatchCrazyCatMainActivity;
 import com.learn.android.demos.juhe.JuHeApiMainActivity;
 
 /**
@@ -23,9 +25,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	private Button guide_btn;
 	private Button game2048_btn;
 	private Button juhe_btn;
-
-	// private Button toast_btn;
-	// private Button toast_btn;
+	private Button clock_btn;
+	private Button gamecatchcrazycat_btn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		guide_btn = (Button) findViewById(R.id.guide_btn);
 		game2048_btn = (Button) findViewById(R.id.game2048_btn);
 		juhe_btn = (Button) findViewById(R.id.juhe_btn);
-
+		clock_btn =  (Button) findViewById(R.id.clock_btn);
+		gamecatchcrazycat_btn =  (Button) findViewById(R.id.gamecatchcrazycat_btn);
+		
 	}
 
 	@Override
@@ -50,6 +53,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		guide_btn.setOnClickListener(this);
 		game2048_btn.setOnClickListener(this);
 		juhe_btn.setOnClickListener(this);
+		clock_btn.setOnClickListener(this);
+		gamecatchcrazycat_btn.setOnClickListener(this);
 	}
 
 
@@ -73,7 +78,13 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		case R.id.juhe_btn:
 			openActivity(JuHeApiMainActivity.class);
 			break;
-
+			
+		case R.id.clock_btn:
+			openActivity(ClockMainActivity.class);
+			break;
+		case R.id.gamecatchcrazycat_btn:
+			openActivity(CatchCrazyCatMainActivity.class);
+			break;
 		default:
 			break;
 		}

@@ -1,4 +1,4 @@
-﻿package com.learn.android.utils.tools;
+package com.learn.android.utils.tools;
 
 
 

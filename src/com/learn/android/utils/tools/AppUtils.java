@@ -1,6 +1,4 @@
-﻿package com.learn.android.utils.tools;
-
-
+package com.learn.android.utils.tools;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

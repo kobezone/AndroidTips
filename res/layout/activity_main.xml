@@ -28,11 +28,23 @@
         android:layout_height="wrap_content"
         android:text="聚合api测试" />
 
+    <Button
+        android:id="@+id/clock_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="多功能时钟" />
+
+    <Button
+        android:id="@+id/gamecatchcrazycat_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="抓住神经猫" />
+
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:layout_height="match_parent" >
+        android:paddingRight="16dp" >
 
         <TextView
             android:layout_width="wrap_content"
