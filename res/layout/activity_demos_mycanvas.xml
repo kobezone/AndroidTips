@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <Button
+        android:id="@+id/clear_btn"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:text="@string/clearCanvas" >
+    </Button>
+
+    <com.learn.android.demos.canvas.view.MyCanvasView
+        android:id="@+id/mycanvas_mv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/clear_btn"
+        android:gravity="center" >
+    </com.learn.android.demos.canvas.view.MyCanvasView>
+
+</RelativeLayout>
