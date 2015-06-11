@@ -10,6 +10,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.Window;
+import android.view.View.OnClickListener;
 
 /**
  * baseActivity 封装baseActivity的方法
@@ -18,7 +19,7 @@ import android.view.Window;
  * 2015-4-23t下午2:39:15
  * @desciption
  */
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends Activity implements OnClickListener{
 	public static final String TAG = BaseActivity.class.getSimpleName();
 
 	//handler的sample代码

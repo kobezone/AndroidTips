@@ -27,7 +27,7 @@ public class TextAdapter extends BaseAdapter{
 	
 	@Override
 	public int getCount() {
-		return lists.size();
+		return lists==null?0:lists.size();
 	}
 
 	@Override

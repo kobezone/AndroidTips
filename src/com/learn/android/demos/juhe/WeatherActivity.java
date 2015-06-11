@@ -2,6 +2,11 @@ package com.learn.android.demos.juhe;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,16 +18,40 @@ import com.thinkland.sdk.android.Parameters;
 public class WeatherActivity extends Activity {
 
 	private TextView tv;
+	private EditText city_et;
+	private Button test_btn;
+	private String cityName = "深圳";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		setContentView(R.layout.activity_juhe_item);
 		tv = (TextView) findViewById(R.id.juhe_tv);
-		
+		city_et = (EditText) findViewById(R.id.city_et);
+		test_btn = (Button) findViewById(R.id.test_btn);
+
+		checkWeather(cityName);
+
+		test_btn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (!TextUtils.isEmpty(city_et.getText().toString())) {
+					cityName = city_et.getText().toString();
+				}else{
+				  cityName="深圳";
+				}
+				checkWeather(cityName);
+			}
+		});
+
+	}
+
+	private void checkWeather(String name) {
+		tv.setText("");
 		Parameters params = new Parameters();
-		params.add("cityname", "深圳");
+		params.add("cityname", name);
 		// params.add("key", "ef24f10dac55a15ab61df3f744710fce");
 		params.add("dtype", "json");
 		/**
@@ -40,7 +69,7 @@ public class WeatherActivity extends Activity {
 					@Override
 					public void onSuccess(int statusCode, String responseString) {
 						// TODO Auto-generated method stub
-						
+
 						tv.append(responseString + "\n");
 					}
 
@@ -66,7 +95,6 @@ public class WeatherActivity extends Activity {
 						tv.append(throwable.getMessage() + "\n");
 					}
 				});
-
 	}
 
 }

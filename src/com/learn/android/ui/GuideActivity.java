@@ -49,10 +49,10 @@ public class GuideActivity extends Activity implements OnPageChangeListener {
 		guide_vp = (ViewPager) findViewById(R.id.guide_vp);
 	
 		ImageView iv1 = new ImageView(this);
-		iv1.setBackgroundResource(R.drawable.ic_welcome_01);
+		iv1.setBackgroundResource(R.drawable.ic_welcome01);
 
 		ImageView iv2 = new ImageView(this);
-		iv2.setBackgroundResource(R.drawable.ic_welcome_02);
+		iv2.setBackgroundResource(R.drawable.ic_welcome02);
 
 		
 		View view = LayoutInflater.from(this).inflate(R.layout.activity_guide_end, null);

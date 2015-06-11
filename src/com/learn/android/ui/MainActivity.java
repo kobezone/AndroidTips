@@ -8,11 +8,13 @@ import android.widget.Button;
 
 import com.learn.android.R;
 import com.learn.android.base.BaseActivity;
+import com.learn.android.demos.canvas.MyCanvasActivity;
 import com.learn.android.demos.clock.ClockMainActivity;
 import com.learn.android.demos.game2048.Game2048Activity;
 import com.learn.android.demos.gamecatchcrazycat.CatchCrazyCatMainActivity;
 import com.learn.android.demos.juhe.JuHeApiMainActivity;
 import com.learn.android.demos.tuling.TulingMainActivity;
+import com.learn.android.html5.JSBridgeDemoActivity;
 
 /**
  * <pre>
@@ -22,7 +24,7 @@ import com.learn.android.demos.tuling.TulingMainActivity;
  * @author JUN email jun_dev@qq.com QQ群 313683173
  * 
  */
-public class MainActivity extends BaseActivity implements OnClickListener {
+public class MainActivity extends BaseActivity {
 	private Button toast_btn;
 	private Button guide_btn;
 	private Button game2048_btn;
@@ -30,19 +32,21 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	private Button clock_btn;
 	private Button gamecatchcrazycat_btn;
 	private Button tuling_btn;
+	private Button jsbridge_btn;
+	private Button mycanvas_btn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-//		todo
+
+		// todo
 		Uri uridata = this.getIntent().getData();
-		if(uridata!=null){
+		if (uridata != null) {
 			String data = uridata.getQueryParameter("data");
-			System.out.println("数据:data"+data);
+			System.out.println("数据:data" + data);
 		}
-		
+
 		initView();
 		initData();
 	}
@@ -53,11 +57,12 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		guide_btn = (Button) findViewById(R.id.guide_btn);
 		game2048_btn = (Button) findViewById(R.id.game2048_btn);
 		juhe_btn = (Button) findViewById(R.id.juhe_btn);
-		clock_btn =  (Button) findViewById(R.id.clock_btn);
-		gamecatchcrazycat_btn =  (Button) findViewById(R.id.gamecatchcrazycat_btn);
-		tuling_btn =  (Button) findViewById(R.id.tuling_btn);
-		
-		
+		clock_btn = (Button) findViewById(R.id.clock_btn);
+		gamecatchcrazycat_btn = (Button) findViewById(R.id.gamecatchcrazycat_btn);
+		tuling_btn = (Button) findViewById(R.id.tuling_btn);
+		jsbridge_btn = (Button) findViewById(R.id.jsbridge_btn);
+		mycanvas_btn =  (Button)findViewById(R.id.mycanvas_btn);
+
 	}
 
 	@Override
@@ -69,9 +74,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		clock_btn.setOnClickListener(this);
 		gamecatchcrazycat_btn.setOnClickListener(this);
 		tuling_btn.setOnClickListener(this);
+		jsbridge_btn.setOnClickListener(this);
+		mycanvas_btn.setOnClickListener(this);
 	}
-
-
 
 	@Override
 	public void onClick(View v) {
@@ -92,16 +97,24 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		case R.id.juhe_btn:
 			openActivity(JuHeApiMainActivity.class);
 			break;
-			
+
 		case R.id.clock_btn:
 			openActivity(ClockMainActivity.class);
 			break;
 		case R.id.gamecatchcrazycat_btn:
 			openActivity(CatchCrazyCatMainActivity.class);
 			break;
-			
+
 		case R.id.tuling_btn:
 			openActivity(TulingMainActivity.class);
+			break;
+
+		case R.id.jsbridge_btn:
+			openActivity(JSBridgeDemoActivity.class);
+			break;
+
+		case R.id.mycanvas_btn:
+			openActivity(MyCanvasActivity.class);
 			break;
 		default:
 			break;
